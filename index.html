@@ -40,7 +40,15 @@
           <div class="file-info" id="file-info"></div>
         </div>
 
-        <button id="remove-btn" class="btn-primary" style="margin-top: 20px;">
+        <label>Output Quality</label>
+        <select id="quality-select" class="btn-secondary" style="width: 100%; margin-bottom: 20px; text-align: left; padding: 12px; appearance: auto;">
+          <option value="original">Original (Full Size)</option>
+          <option value="1080">1080p (High Definition)</option>
+          <option value="720">720p (Standard HD)</option>
+          <option value="480">480p (Fast Processing)</option>
+        </select>
+
+        <button id="remove-btn" class="btn-primary" style="margin-top: 10px;">
           <span id="spinner" class="spinner" hidden></span>
           Remove Background
         </button>

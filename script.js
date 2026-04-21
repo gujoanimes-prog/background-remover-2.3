@@ -22,6 +22,9 @@ const historyCard = document.getElementById("history-card");
 const startWorkBtn = document.getElementById("start-work");
 const toggleHistoryBtn = document.getElementById("toggle-history");
 
+// Quality selector
+const qualitySelect = document.getElementById("quality-select");
+
 /* ---------- UTILITIES ---------- */
 function toast(msg) { alert(msg); }
 
@@ -32,6 +35,25 @@ function formatBytes(bytes) {
   const sizes = ["B", "KB", "MB", "GB", "TB"];
   const i = Math.floor(Math.log(bytes) / Math.log(k));
   return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
+}
+
+/**
+ * Resizes an image to a target height while maintaining aspect ratio.
+ */
+async function resizeImage(imgElement, targetHeight) {
+  return new Promise((resolve) => {
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    
+    const scaleFactor = targetHeight / imgElement.naturalHeight;
+    const targetWidth = imgElement.naturalWidth * scaleFactor;
+    
+    canvas.width = targetWidth;
+    canvas.height = targetHeight;
+    
+    ctx.drawImage(imgElement, 0, 0, targetWidth, targetHeight);
+    canvas.toBlob((blob) => resolve(blob), "image/png");
+  });
 }
 
 /* ---------- FILE HANDLING ---------- */
@@ -104,9 +126,26 @@ removeBtn.addEventListener("click", async () => {
   spinner.hidden = false;
 
   try {
+    let blob;
+    const qualityValue = qualitySelect.value;
+
+    if (qualityValue === "original") {
+      // Use original file
+      const response = await fetch(previewImg.src);
+      blob = await response.blob();
+    } else {
+      // Resize to selected quality (480, 720, 1080)
+      const targetHeight = parseInt(qualityValue);
+      // Only downscale, don't upscale
+      if (previewImg.naturalHeight > targetHeight) {
+        blob = await resizeImage(previewImg, targetHeight);
+      } else {
+        const response = await fetch(previewImg.src);
+        blob = await response.blob();
+      }
+    }
+
     const formData = new FormData();
-    const response = await fetch(previewImg.src);
-    const blob = await response.blob();
     const file = new File([blob], "upload.png", { type: blob.type });
     formData.append("image", file);
 
