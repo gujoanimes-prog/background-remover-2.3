@@ -11,43 +11,49 @@
 </head>
 <body>
   <header class="header">
-    <h1>AI Background Remover</h1>
-  </header>
+  <h1>AI Background Remover</h1>
+</header>
 
-  <main class="container">
-    <!-- Upload Card -->
-    <section class="card upload-card">
-      <h2>Upload Image</h2>
-      <div id="drop-zone" class="drop-zone">
-        <p>Drag & Drop or click to select</p>
-        <input type="file" id="file-input" accept="image/png, image/jpeg" hidden>
-      </div>
-      <div class="preview-wrapper" id="preview-wrapper" hidden>
-        <img id="preview-img" alt="preview">
-        <button id="remove-preview" class="small-btn">✖︎</button>
-      </div>
-    </section>
+<div class="toolbar">
+  <button id="start-work" class="btn primary-btn">Start Work</button>
+  <button id="toggle-history" class="btn primary-btn">File Manager</button>
+</div>
 
-    <!-- Action Card -->
-    <section class="card action-card" id="action-card" hidden>
-      <h2>Remove Background</h2>
-      <button id="remove-btn" class="primary-btn">Remove Background</button>
-      <div class="spinner" id="spinner" hidden></div>
-    </section>
+<main class="container">
+  <!-- Upload Card -->
+  <section class="card upload-card">
+    <h2>Upload Image</h2>
+    <div id="drop-zone" class="drop-zone">
+      <p>Drag & Drop or click to select</p>
+      <input type="file" id="file-input" accept="image/png, image/jpeg" hidden>
+    </div>
+    <div class="preview-wrapper" id="preview-wrapper" hidden>
+      <img id="preview-img" alt="preview">
+      <button id="remove-preview" class="small-btn">✖︎</button>
+    </div>
+    <div class="file-info" id="file-info" hidden></div>
+  </section>
 
-    <!-- Result Card -->
-    <section class="card result-card" id="result-card" hidden>
-      <h2>Result</h2>
-      <img id="result-img" alt="result" class="result-img">
-      <a id="download-link" class="primary-btn" download="transparent.png">Download PNG</a>
-    </section>
+  <!-- Action Card -->
+  <section class="card action-card" id="action-card" hidden>
+    <h2>Remove Background</h2>
+    <button id="remove-btn" class="primary-btn">Remove Background</button>
+    <div class="spinner" id="spinner" hidden></div>
+  </section>
 
-    <!-- History Card -->
-    <section class="card history-card">
-      <h2>History</h2>
-      <div id="history-grid" class="grid"></div>
-    </section>
-  </main>
+  <!-- Result Card -->
+  <section class="card result-card" id="result-card" hidden>
+    <h2>Result</h2>
+    <img id="result-img" alt="result" class="result-img">
+    <a id="download-link" class="primary-btn" download="transparent.png">Download PNG</a>
+  </section>
+
+  <!-- History Card -->
+  <section class="card history-card" id="history-card" hidden>
+    <h2>History</h2>
+    <div id="history-grid" class="grid"></div>
+  </section>
+</main>
 
   <script src="script.js"></script>
 </body>
