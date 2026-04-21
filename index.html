@@ -10,50 +10,68 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header class="header">
-  <h1>AI Background Remover</h1>
-</header>
+  <div class="container">
+    <header>
+      <div class="badge">AI Image Studio</div>
+      <h1>AI Background Remover</h1>
+      <p>Turn your images into transparent PNGs instantly.</p>
+    </header>
 
-<div class="toolbar">
-  <button id="start-work" class="btn primary-btn">Start Work</button>
-  <button id="toggle-history" class="btn primary-btn">File Manager</button>
-</div>
-
-<main class="container">
-  <!-- Upload Card -->
-  <section class="card upload-card">
-    <h2>Upload Image</h2>
-    <div id="drop-zone" class="drop-zone">
-      <p>Drag & Drop or click to select</p>
-      <input type="file" id="file-input" accept="image/png, image/jpeg" hidden>
+    <div class="toolbar">
+      <button id="start-work" class="btn-secondary">Start Work</button>
+      <button id="toggle-history" class="btn-secondary">File Manager</button>
     </div>
-    <div class="preview-wrapper" id="preview-wrapper" hidden>
-      <img id="preview-img" alt="preview">
-      <button id="remove-preview" class="small-btn">✖︎</button>
+
+    <div class="grid-layout">
+      <!-- Upload Card -->
+      <section class="card">
+        <h2>Upload Image</h2>
+        <p class="description">Select a JPG or PNG image to remove its background using AI.</p>
+        
+        <label>Choose image</label>
+        <div id="drop-zone" class="drop-zone">
+          <p>Drag & Drop or click to select</p>
+          <input type="file" id="file-input" accept="image/png, image/jpeg" hidden>
+        </div>
+
+        <div class="preview-container" id="preview-wrapper" hidden>
+          <img id="preview-img" alt="preview">
+          <button id="remove-preview" class="remove-preview">✖</button>
+          <div class="file-info" id="file-info"></div>
+        </div>
+
+        <button id="remove-btn" class="btn-primary" style="margin-top: 20px;">
+          <span id="spinner" class="spinner" hidden></span>
+          Remove Background
+        </button>
+      </section>
+
+      <!-- Result Card -->
+      <section class="card" id="result-card" hidden>
+        <h2>Result</h2>
+        <p class="description">Your processed image is ready for download.</p>
+        
+        <div class="preview-container">
+          <img id="result-img" alt="result">
+        </div>
+        
+        <a id="download-link" class="btn-primary" download="transparent.png" style="text-decoration: none; text-align: center; display: block; margin-top: 20px;">
+          Download PNG
+        </a>
+      </section>
     </div>
-    <div class="file-info" id="file-info" hidden></div>
-  </section>
 
-  <!-- Action Card -->
-  <section class="card action-card" id="action-card" hidden>
-    <h2>Remove Background</h2>
-    <button id="remove-btn" class="primary-btn">Remove Background</button>
-    <div class="spinner" id="spinner" hidden></div>
-  </section>
+    <!-- History Section -->
+    <section class="card history-card" id="history-card">
+      <h2>History</h2>
+      <p class="description">Your recent background removals.</p>
+      <div id="history-grid" class="history-grid"></div>
+    </section>
 
-  <!-- Result Card -->
-  <section class="card result-card" id="result-card" hidden>
-    <h2>Result</h2>
-    <img id="result-img" alt="result" class="result-img">
-    <a id="download-link" class="primary-btn" download="transparent.png">Download PNG</a>
-  </section>
-
-  <!-- History Card -->
-  <section class="card history-card" id="history-card" hidden>
-    <h2>History</h2>
-    <div id="history-grid" class="grid"></div>
-  </section>
-</main>
+    <footer>
+      <p>API processing via Replicate. Data stored in Supabase.</p>
+    </footer>
+  </div>
 
   <script src="script.js"></script>
 </body>
