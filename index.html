@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI Background Remover</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <h1>AI Background Remover</h1>
+  </header>
+
+  <main class="container">
+    <!-- Upload Card -->
+    <section class="card upload-card">
+      <h2>Upload Image</h2>
+      <div id="drop-zone" class="drop-zone">
+        <p>Drag & Drop or click to select</p>
+        <input type="file" id="file-input" accept="image/png, image/jpeg" hidden>
+      </div>
+      <div class="preview-wrapper" id="preview-wrapper" hidden>
+        <img id="preview-img" alt="preview">
+        <button id="remove-preview" class="small-btn">✖︎</button>
+      </div>
+    </section>
+
+    <!-- Action Card -->
+    <section class="card action-card" id="action-card" hidden>
+      <h2>Remove Background</h2>
+      <button id="remove-btn" class="primary-btn">Remove Background</button>
+      <div class="spinner" id="spinner" hidden></div>
+    </section>
+
+    <!-- Result Card -->
+    <section class="card result-card" id="result-card" hidden>
+      <h2>Result</h2>
+      <img id="result-img" alt="result" class="result-img">
+      <a id="download-link" class="primary-btn" download="transparent.png">Download PNG</a>
+    </section>
+
+    <!-- History Card -->
+    <section class="card history-card">
+      <h2>History</h2>
+      <div id="history-grid" class="grid"></div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
